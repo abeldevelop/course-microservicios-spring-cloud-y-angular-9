@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "c8e4caf9-b528-45d7-9a77-0b158f1083c3",
+		"name": "microservicio-zuul",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "ListarUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerUsuarioPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos/1",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarUsuarioPorId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos/1",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CrearUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Nombre\",\r\n    \"apellido\": \"Apellido\",\r\n    \"email\": \"nombre@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarUsuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Nombre Editado\",\r\n    \"apellido\": \"Apellido\",\r\n    \"email\": \"nombre@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos/1",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ea3f1be7-e649-427d-b1fe-acfd195f5167",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b3ca6c65-5655-4d93-a5f2-7a73e4e0acce",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

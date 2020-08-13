@@ -1,4 +1,4 @@
-package com.abeldevelop.course.microservicio.app.usuarios.model;
+package com.abeldevelop.course.microservicio.commons.alumnos.model;
 
 import java.util.Date;
 

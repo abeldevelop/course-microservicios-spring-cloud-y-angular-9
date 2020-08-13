@@ -27,6 +27,26 @@
 					"response": []
 				},
 				{
+					"name": "FiltrarUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos/filtrar/no",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos",
+								"filtrar",
+								"no"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "VerUsuarioPorId",
 					"request": {
 						"method": "GET",
@@ -118,6 +138,223 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "cursos",
+			"item": [
+				{
+					"name": "ListarCursos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerCursoPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos/2",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerCursoPorIdDeAlumno",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos/alumno/2",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos",
+								"alumno",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarCursoPorId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos/1",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CrearCurso",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Nombre\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarCurso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Nombre Editado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos/1",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AsignarAlumnoAUnCurso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 2,\r\n        \"nombre\": \"Nombre\",\r\n        \"apellido\": \"Apellido\",\r\n        \"email\": \"nombre@email.com\",\r\n        \"createAt\": \"2020-08-13T18:45:47.598+00:00\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos/2/asignar-alumnos",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos",
+								"2",
+								"asignar-alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarAlumnoDeUnCurso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos/2/eliminar-alumno",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos",
+								"2",
+								"eliminar-alumno"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cbe03044-b384-4d43-838b-023a4b7951a6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "223eb16e-790b-4d4c-b219-1037cafbbe31",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			],
 			"protocolProfileBehavior": {}

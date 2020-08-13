@@ -1,6 +1,11 @@
 package com.abeldevelop.course.microservicio.app.usuarios.service;
 
-import com.abeldevelop.course.microservicio.app.usuarios.model.Alumno;
-import com.abeldevelop.course.microservicio.common.service.CommonService;
+import java.util.List;
 
-public interface AlumnoService extends CommonService<Alumno> {}
+import com.abeldevelop.course.microservicio.common.service.CommonService;
+import com.abeldevelop.course.microservicio.commons.alumnos.model.Alumno;
+
+public interface AlumnoService extends CommonService<Alumno> {
+
+  List<Alumno> findByNombreOrApellido(String termino);
+}

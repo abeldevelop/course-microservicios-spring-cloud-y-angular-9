@@ -1,25 +1,26 @@
-package com.abeldevelop.course.microservicio.app.cursos.model;
+package com.abeldevelop.course.microservicio.commons.examenes.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.abeldevelop.course.microservicio.commons.alumnos.model.Alumno;
-import com.abeldevelop.course.microservicio.commons.examenes.model.Examen;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -34,8 +35,8 @@ import lombok.ToString;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 @Entity
-@Table(name = "cursos")
-public class Curso {
+@Table(name = "examenes")
+public class Examen {
 
   @EqualsAndHashCode.Include
   @Id
@@ -49,35 +50,41 @@ public class Curso {
   @Temporal(TemporalType.TIMESTAMP)
   private Date createAt;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  private List<Alumno> alumnos;
+  @Setter(AccessLevel.NONE)
+  @JsonIgnoreProperties(
+      value = {"examen"},
+      allowSetters = true)
+  @OneToMany(
+      mappedBy = "examen",
+      fetch = FetchType.LAZY,
+      cascade = CascadeType.ALL,
+      orphanRemoval = true)
+  private List<Pregunta> preguntas;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  private List<Examen> examenes;
-
-  public Curso() {
-    this.alumnos = new ArrayList<>();
-    this.examenes = new ArrayList<>();
-  }
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Asignatura asignatura;
 
   @PrePersist
   public void prePersist() {
     this.createAt = new Date();
   }
 
-  public void addAlumno(Alumno alumno) {
-    this.alumnos.add(alumno);
+  public Examen() {
+    this.preguntas = new ArrayList<>();
   }
 
-  public void removeAlumno(Alumno alumno) {
-    this.alumnos.remove(alumno);
+  public void addPregunta(Pregunta pregunta) {
+    pregunta.setExamen(this);
+    this.preguntas.add(pregunta);
   }
 
-  public void addExamen(Examen examen) {
-    this.examenes.add(examen);
+  public void removePregunta(Pregunta pregunta) {
+    pregunta.setExamen(null);
+    this.preguntas.remove(pregunta);
   }
 
-  public void removeExamen(Examen examen) {
-    this.examenes.remove(examen);
+  public void setPreguntas(List<Pregunta> preguntas) {
+    this.preguntas.clear();
+    preguntas.forEach(this::addPregunta);
   }
 }

@@ -333,6 +333,64 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "AsignarExamenAUnCurso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 3,\r\n        \"nombre\": \"Examen de Historia\",\r\n        \"createAt\": \"2020-08-15T13:50:13.545+00:00\",\r\n        \"preguntas\": []\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos/2/asignar-examenes",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos",
+								"2",
+								"asignar-examenes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarExamenDeUnCurso",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/cursos/2/eliminar-examen",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"cursos",
+								"2",
+								"eliminar-examen"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -350,6 +408,184 @@
 					"listen": "test",
 					"script": {
 						"id": "223eb16e-790b-4d4c-b219-1037cafbbe31",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "examenes",
+			"item": [
+				{
+					"name": "ListarExamenes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/examenes",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"examenes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarAsignaturas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/examenes/asignaturas",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"examenes",
+								"asignaturas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerExamenPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/examenes/10",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"examenes",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FiltrarExamenes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/examenes/filtrar/histo",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"examenes",
+								"filtrar",
+								"histo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarExamenPorId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/examenes/10",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"examenes",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CrearExamen",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Examen de Historia\",\r\n    \"preguntas\": [\r\n        {\"texto\": \"¿Quien descubrio america?\"},\r\n        {\"texto\": \"¿En que año se descubrio america?\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/examenes",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"examenes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditarExamen",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Examen de Historia\",\r\n    \"preguntas\": [\r\n        {\"texto\": \"¿Quien descubrio america?\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/examenes/10",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"examenes",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "07458f07-1c57-4d03-91d5-3c713e5858ea",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7293fecd-32c9-46f5-bfa0-6ef9bcf23a88",
 						"type": "text/javascript",
 						"exec": [
 							""

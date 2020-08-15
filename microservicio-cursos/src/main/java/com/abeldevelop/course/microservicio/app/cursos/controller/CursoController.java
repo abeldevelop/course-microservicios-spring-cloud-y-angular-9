@@ -15,6 +15,7 @@ import com.abeldevelop.course.microservicio.app.cursos.model.Curso;
 import com.abeldevelop.course.microservicio.app.cursos.service.CursoService;
 import com.abeldevelop.course.microservicio.common.controller.CommonController;
 import com.abeldevelop.course.microservicio.commons.alumnos.model.Alumno;
+import com.abeldevelop.course.microservicio.commons.examenes.model.Examen;
 
 import lombok.AllArgsConstructor;
 
@@ -58,5 +59,26 @@ public class CursoController extends CommonController<Curso, CursoService> {
   @GetMapping("/alumno/{id}")
   public ResponseEntity<?> buscarPorAlumno(@PathVariable Long id) {
     return ResponseEntity.status(HttpStatus.OK).body(service.findCursoByAlumnoId(id));
+  }
+
+  @PutMapping("/{id}/asignar-examenes")
+  public ResponseEntity<?> asignarExamenes(
+      @PathVariable Long id, @RequestBody List<Examen> examenes) {
+    Optional<Curso> cursoInDb = service.findById(id);
+    if (!cursoInDb.isPresent()) {
+      return ResponseEntity.notFound().build();
+    }
+    examenes.forEach(e -> cursoInDb.get().addExamen(e));
+    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(cursoInDb.get()));
+  }
+
+  @PutMapping("/{id}/eliminar-examen")
+  public ResponseEntity<?> eliminarExamenes(@PathVariable Long id, @RequestBody Examen examen) {
+    Optional<Curso> cursoInDb = service.findById(id);
+    if (!cursoInDb.isPresent()) {
+      return ResponseEntity.notFound().build();
+    }
+    cursoInDb.get().removeExamen(examen);
+    return ResponseEntity.status(HttpStatus.CREATED).body(service.save(cursoInDb.get()));
   }
 }

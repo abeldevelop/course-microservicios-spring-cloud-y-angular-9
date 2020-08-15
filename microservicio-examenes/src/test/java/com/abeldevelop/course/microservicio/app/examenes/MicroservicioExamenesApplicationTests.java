@@ -1,10 +1,10 @@
-package com.abeldevelop.course.microservicio.commons.alumnos;
+package com.abeldevelop.course.microservicio.app.examenes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CommonsAlumnosApplicationTests {
+class MicroservicioExamenesApplicationTests {
 
 	@Test
 	void contextLoads() {

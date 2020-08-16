@@ -3,8 +3,11 @@ package com.abeldevelop.course.microservicio.app.cursos.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,7 +27,11 @@ import lombok.AllArgsConstructor;
 public class CursoController extends CommonController<Curso, CursoService> {
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody Curso curso) {
+  public ResponseEntity<?> editar(
+      @PathVariable Long id, @Valid @RequestBody Curso curso, BindingResult result) {
+    if (result.hasErrors()) {
+      return validar(result);
+    }
     Optional<Curso> cursoInDb = service.findById(id);
     if (!cursoInDb.isPresent()) {
       return ResponseEntity.notFound().build();

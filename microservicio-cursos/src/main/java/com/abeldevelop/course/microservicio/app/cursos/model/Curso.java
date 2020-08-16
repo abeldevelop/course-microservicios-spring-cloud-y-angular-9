@@ -16,6 +16,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import com.abeldevelop.course.microservicio.commons.alumnos.model.Alumno;
 import com.abeldevelop.course.microservicio.commons.examenes.model.Examen;
@@ -42,6 +43,7 @@ public class Curso {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @NotEmpty
   @Column(name = "nombre")
   private String nombre;
 

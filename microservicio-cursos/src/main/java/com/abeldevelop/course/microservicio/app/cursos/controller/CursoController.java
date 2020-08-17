@@ -2,6 +2,7 @@ package com.abeldevelop.course.microservicio.app.cursos.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -65,7 +66,24 @@ public class CursoController extends CommonController<Curso, CursoService> {
 
   @GetMapping("/alumno/{id}")
   public ResponseEntity<?> buscarPorAlumno(@PathVariable Long id) {
-    return ResponseEntity.status(HttpStatus.OK).body(service.findCursoByAlumnoId(id));
+    Curso curso = service.findCursoByAlumnoId(id);
+    if (curso != null) {
+      List<Long> examenesIds = service.obtenerExamenesIdsConRespuestasAlumno(id);
+      List<Examen> examenes =
+          curso
+              .getExamenes()
+              .stream()
+              .map(
+                  examen -> {
+                    if (examenesIds.contains(examen.getId())) {
+                      examen.setRespondido(true);
+                    }
+                    return examen;
+                  })
+              .collect(Collectors.toList());
+      curso.setExamenes(examenes);
+    }
+    return ResponseEntity.status(HttpStatus.OK).body(curso);
   }
 
   @PutMapping("/{id}/asignar-examenes")

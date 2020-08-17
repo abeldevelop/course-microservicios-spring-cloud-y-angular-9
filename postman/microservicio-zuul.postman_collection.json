@@ -27,6 +27,35 @@
 					"response": []
 				},
 				{
+					"name": "ListarUsuariosPaginacion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos/pagina?page=1&size=10",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos",
+								"pagina"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "FiltrarUsuarios",
 					"request": {
 						"method": "GET",
@@ -60,6 +89,28 @@
 								"api",
 								"alumnos",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerFotoUsuarioPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos//uploads/img/3",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos",
+								"",
+								"uploads",
+								"img",
+								"3"
 							]
 						}
 					},
@@ -106,6 +157,55 @@
 							"path": [
 								"api",
 								"alumnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CrearUsuarioConFoto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "archivo",
+									"type": "file",
+									"src": "/C:/Users/abelf/Downloads/profile1.png"
+								},
+								{
+									"key": "nombre",
+									"value": "Jano",
+									"type": "text"
+								},
+								{
+									"key": "apellido",
+									"value": "Perez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mail@mail.com",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/alumnos/crear-con-foto",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"alumnos",
+								"crear-con-foto"
 							]
 						}
 					},
@@ -188,7 +288,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zuul-url}}/api/cursos/alumno/2",
+							"raw": "{{zuul-url}}/api/cursos/alumno/1",
 							"host": [
 								"{{zuul-url}}"
 							],
@@ -196,7 +296,7 @@
 								"api",
 								"cursos",
 								"alumno",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -463,14 +563,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zuul-url}}/api/examenes/10",
+							"raw": "{{zuul-url}}/api/examenes/1",
 							"host": [
 								"{{zuul-url}}"
 							],
 							"path": [
 								"api",
 								"examenes",
-								"10"
+								"1"
 							]
 						}
 					},
@@ -522,7 +622,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Examen de Historia\",\r\n    \"preguntas\": [\r\n        {\"texto\": \"¿Quien descubrio america?\"},\r\n        {\"texto\": \"¿En que año se descubrio america?\"}\r\n    ]\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Examen de Historia\",\r\n    \"preguntas\": [\r\n        {\r\n            \"texto\": \"¿Quien descubrio america?\"\r\n        },\r\n        {\r\n            \"texto\": \"¿En que año se descubrio america?\"\r\n        }\r\n    ],\r\n    \"asignatura\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Matemáticas\",\r\n        \"padre\": null,\r\n        \"hijos\": [\r\n            {\r\n                \"id\": 8,\r\n                \"nombre\": \"Algebra\",\r\n                \"hijos\": []\r\n            },\r\n            {\r\n                \"id\": 9,\r\n                \"nombre\": \"Aritmética\",\r\n                \"hijos\": []\r\n            },\r\n            {\r\n                \"id\": 10,\r\n                \"nombre\": \"Trigonometría\",\r\n                \"hijos\": []\r\n            }\r\n        ]\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -591,6 +691,82 @@
 							""
 						]
 					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "respuestas",
+			"item": [
+				{
+					"name": "CrearRespuesta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"texto\": \"Respuesta uno\",\r\n        \"alumno\": {\r\n            \"id\": 1,\r\n            \"nombre\": \"Nombre\",\r\n            \"apellido\": \"Apellido\",\r\n            \"email\": \"nombre@email.com\",\r\n            \"createAt\": \"2020-08-17T18:52:35.797+00:00\",\r\n            \"fotoHashCode\": null\r\n        },\r\n        \"pregunta\": {\r\n            \"id\": 1,\r\n            \"texto\": \"¿Quien descubrio america?\"\r\n        }\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{zuul-url}}/api/respuestas",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"respuestas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerRespuestaPorAlumnoAndExamen",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/respuestas/alumno/1/examen/1",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"respuestas",
+								"alumno",
+								"1",
+								"examen",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerExamenesIdsConRespuestasAlumno",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zuul-url}}/api/respuestas/alumno/1/examenes-respondidos",
+							"host": [
+								"{{zuul-url}}"
+							],
+							"path": [
+								"api",
+								"respuestas",
+								"alumno",
+								"1",
+								"examenes-respondidos"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

@@ -17,6 +17,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -66,9 +67,12 @@ public class Examen {
       orphanRemoval = true)
   private List<Pregunta> preguntas;
 
+  @JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer"})
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   private Asignatura asignatura;
+
+  @Transient private boolean respondido;
 
   @PrePersist
   public void prePersist() {

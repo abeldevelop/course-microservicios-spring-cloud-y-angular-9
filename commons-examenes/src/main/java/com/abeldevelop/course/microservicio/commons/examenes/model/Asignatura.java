@@ -41,12 +41,12 @@ public class Asignatura {
   @Column(name = "nombre")
   private String nombre;
 
-  @JsonIgnoreProperties(value = {"hijos"})
+  @JsonIgnoreProperties(value = {"hijos", "handler", "hibernateLazyInitializer"})
   @ManyToOne(fetch = FetchType.LAZY)
   private Asignatura padre;
 
   @JsonIgnoreProperties(
-      value = {"padre"},
+      value = {"padre", "handler", "hibernateLazyInitializer"},
       allowSetters = true)
   @OneToMany(mappedBy = "padre", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<Asignatura> hijos;

@@ -7,6 +7,8 @@ import com.abeldevelop.course.microservicio.common.service.impl.CommonServiceImp
 import com.abeldevelop.course.microservicio.commons.alumnos.model.Alumno;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,5 +41,17 @@ public class AlumnoServiceImpl extends CommonServiceImpl<Alumno, AlumnoRepositor
   public void deleteById(Long id) {
     super.deleteById(id);
     eliminarCursoAlumnoPorId(id);
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public Page<Alumno> findAll(Pageable pageable) {
+    return repository.findAllByOrderByIdAsc(pageable);
+  }
+
+  @Transactional(readOnly = true)
+  @Override
+  public List<Alumno> findAll() {
+    return repository.findAllByOrderByIdAsc();
   }
 }

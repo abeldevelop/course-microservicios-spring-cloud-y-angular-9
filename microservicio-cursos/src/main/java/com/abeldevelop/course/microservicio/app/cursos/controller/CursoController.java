@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -144,19 +145,21 @@ public class CursoController extends CommonController<Curso, CursoService> {
     Curso curso = service.findCursoByAlumnoId(id);
     if (curso != null) {
       List<Long> examenesIds = service.obtenerExamenesIdsConRespuestasAlumno(id);
-      List<Examen> examenes =
-          curso
-              .getExamenes()
-              .stream()
-              .map(
-                  examen -> {
-                    if (examenesIds.contains(examen.getId())) {
-                      examen.setRespondido(true);
-                    }
-                    return examen;
-                  })
-              .collect(Collectors.toList());
-      curso.setExamenes(examenes);
+      if (CollectionUtils.isEmpty(examenesIds)) {
+        List<Examen> examenes =
+            curso
+                .getExamenes()
+                .stream()
+                .map(
+                    examen -> {
+                      if (examenesIds.contains(examen.getId())) {
+                        examen.setRespondido(true);
+                      }
+                      return examen;
+                    })
+                .collect(Collectors.toList());
+        curso.setExamenes(examenes);
+      }
     }
     return ResponseEntity.status(HttpStatus.OK).body(curso);
   }

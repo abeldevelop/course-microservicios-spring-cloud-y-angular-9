@@ -26,6 +26,7 @@ public class RespuestaController {
             .map(
                 r -> {
                   r.setAlumnoId(r.getAlumno().getId());
+                  r.setPreguntaId(r.getPregunta().getId());
                   return r;
                 })
             .collect(Collectors.toList());

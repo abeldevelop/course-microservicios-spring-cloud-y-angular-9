@@ -1,10 +1,13 @@
 package com.abeldevelop.course.microservicio.app.usuarios.controller;
 
+import com.abeldevelop.course.microservicio.app.usuarios.service.AlumnoService;
+import com.abeldevelop.course.microservicio.common.controller.CommonController;
+import com.abeldevelop.course.microservicio.commons.alumnos.model.Alumno;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
+import lombok.AllArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -20,15 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.abeldevelop.course.microservicio.app.usuarios.service.AlumnoService;
-import com.abeldevelop.course.microservicio.common.controller.CommonController;
-import com.abeldevelop.course.microservicio.commons.alumnos.model.Alumno;
-
-import lombok.AllArgsConstructor;
-
 @AllArgsConstructor
 @RestController
 public class AlumnoController extends CommonController<Alumno, AlumnoService> {
+
+  @GetMapping("/alumnos-por-curso")
+  public ResponseEntity<?> obtenerAlumnosPorCurso(@RequestParam List<Long> ids) {
+    return ResponseEntity.ok(service.findAllById(ids));
+  }
 
   @GetMapping("/uploads/img/{id}")
   public ResponseEntity<?> verFoto(@PathVariable Long id) {

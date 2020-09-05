@@ -1,8 +1,7 @@
 package com.abeldevelop.course.microservicio.app.respuestas.service;
 
-import java.util.List;
-
 import com.abeldevelop.course.microservicio.app.respuestas.entity.Respuesta;
+import java.util.List;
 
 public interface RespuestaService {
 

@@ -8,7 +8,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 @EntityScan({
   "com.abeldevelop.course.microservicio.app.respuestas.entity",
-  "com.abeldevelop.course.microservicio.commons.alumnos.model",
   "com.abeldevelop.course.microservicio.commons.examenes.model"
 })
 @SpringBootApplication

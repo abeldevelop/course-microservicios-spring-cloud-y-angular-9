@@ -1,11 +1,10 @@
 package com.abeldevelop.course.microservicio.common.controller;
 
+import com.abeldevelop.course.microservicio.common.service.CommonService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import com.abeldevelop.course.microservicio.common.service.CommonService;
 
 public class CommonController<E, S extends CommonService<E>> {
 
